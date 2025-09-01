@@ -24,9 +24,8 @@ import {
 
 import {
   SiJavascript,
-  SiNextdotjs,
-  SiFigma,
-  SiSupabase,
+    SiPhp,
+    SiUnity,
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads } from "react-icons/fa6";
@@ -54,9 +53,8 @@ export const iconLibrary: Record<string, IconType> = {
   document: HiOutlineDocument,
   rocket: HiOutlineRocketLaunch,
   javascript: SiJavascript,
-  nextjs: SiNextdotjs,
-  supabase: SiSupabase,
-  figma: SiFigma,
+    unity: SiUnity,
+    php: SiPhp,
 };
 
 export type IconLibrary = typeof iconLibrary;

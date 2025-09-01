@@ -1,0 +1,106 @@
+---
+title: "Infinite Minesweeper (WIP)"
+summary: "Development of a flexible and highly customizable design system using Next.js for front-end and Figma for design collaboration."
+images:
+  - "/images/projects/infinite-minesweeper/minefield.png"
+
+---
+
+## Overview
+
+This is my **first solo project**, made in **Unity with C#**.
+It’s a new take on the classic Minesweeper:
+
+- The grid is **infinite** — it keeps growing as you explore.
+- The game is **roguelike** — you have limited flags and must mark a set number of mines to win.
+- The goal is simple: **complete as many qoutas as possible.**
+## Current Features
+
+### 🔹 Infinite Grid System
+- The grid dynamically adjusts to the player’s viewport.
+- As the player moves, new chunks generate seamlessly while off-screen chunks are recycled from a chunk pool to save memory.
+- Lazy generation: chunk data is only created when the player interacts with a tile, ensuring efficient performance even at scale.
+
+![](/images/projects/infinite-minesweeper/grid-generation.gif)
+```csharp:ChunkData.cs
+public class ChunkData
+{
+    private Vector2Int chunkPosition;
+    private Dictionary<Vector2Int, TileData> tiles = new Dictionary<Vector2Int, TileData>();
+
+    public Vector2Int Position => chunkPosition;
+    public Dictionary<Vector2Int, TileData> Tiles => tiles;
+
+    public ChunkData(Vector2Int position)
+    {
+        chunkPosition = position;
+
+        GenerateTiles();
+        ChunkDataGeneratedEvent.Invoke(this);
+    }
+
+    private void GenerateTiles()
+    {
+        int chunkSeed = Hash(GameManager.Instance.Seed, chunkPosition);
+        Random rng = new Random(chunkSeed);
+
+        int size = FieldManager.CHUNK_SIZE;
+        int halfSize = size / 2;
+
+        tiles.Clear();
+
+        for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                int localX = x - halfSize;
+                int localY = y - halfSize;
+
+                Vector2Int localPos = new Vector2Int(localX, localY);
+                Vector2Int worldPos = Utils.LocalToWorld(localPos, chunkPosition, size);
+
+                bool isMine = rng.NextDouble() < 0.2;
+
+                tiles[localPos] = new TileData(isMine, localPos, worldPos);
+            }
+        }
+    }
+
+private int Hash(int seed, Vector2Int pos)
+    {
+        return seed ^ (pos.x * 73856093) ^ (pos.y * 19349663);
+    }
+}
+```
+
+### 🔹 Event System
+The game uses a simple event system to keep things organized.
+This makes it easy for different parts of the game to talk to each other without being directly connected.
+```csharp:BaseEvent.cs
+public interface IEvent { }
+
+public abstract class BaseEvent<TEvent> : IEvent where TEvent : IEvent
+{
+    public static void Subscribe(Action action) =>
+        EventManager.Instance.Subscribe<TEvent>(action);
+
+    public static void Unsubscribe(Action action) =>
+        EventManager.Instance.Unsubscribe<TEvent>(action);
+
+    public static void Invoke() =>
+        EventManager.Instance.TriggerEvent<TEvent>();
+}
+
+public abstract class BaseEvent<TEvent, TParam> : IEvent where TEvent : IEvent
+{
+    public static void Subscribe(Action<TParam> action) =>
+        EventManager.Instance.Subscribe<TEvent, TParam>(action);
+
+    public static void Unsubscribe(Action<TParam> action) =>
+        EventManager.Instance.Unsubscribe<TEvent, TParam>(action);
+
+    public static void Invoke(TParam param) =>
+        EventManager.Instance.TriggerEvent<TEvent, TParam>(param);
+}
+}
+```

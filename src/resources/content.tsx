@@ -2,39 +2,27 @@ import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/
 import { Line, Logo, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  firstName: "Silvano",
+  lastName: "Hoogesteger",
+  name: `Silvano Hoogesteger`,
+  role: "Software Developer",
+  avatar: "/images/avatar.png",
+  email: "220453@student.glu.nl",
+  location: "Europe/Amsterdam", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English", "Dutch"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
-  display: true,
+  display: false,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
   description: <>My weekly newsletter about creativity and engineering</>,
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system",
-  },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/silvano-hoogesteger-b5a72b359/",
   },
   {
     name: "Email",
@@ -49,9 +37,9 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Welcome to my portfolio</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
         <strong className="ml-4">Once UI</strong>{" "}
@@ -65,14 +53,8 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm Selene, a design engineer at{" "}
-      <Logo
-        dark
-        icon="/trademarks/wordmark-dark.svg"
-        style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}
-      />
-      , where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+        I'm Silvano, A software developer currently in my fourth year of Game Development at Grafisch Lyceum Utrecht.
+      <br /> I love creating complex systems that crack my brain and push me to think in new ways.
     </>
   ),
 };
@@ -90,7 +72,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -98,14 +80,12 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+          Hey, I’m Silvano! I’m 19 and in my fourth year of Game Development at Grafisch Lyceum Utrecht. I love creating complex systems that crack my brain and push me to think in new ways. AI and game development are where I get to explore that curiosity, and I’m always looking to learn more, experiment, and grow through every project I work on.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
+    display: false, // set to false to hide this section
     title: "Work Experience",
     experiences: [
       {
@@ -125,7 +105,7 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
+            src: "/images/projects/average-heist-game/cover-01.jpg",
             alt: "Once UI Project",
             width: 16,
             height: 9,
@@ -155,77 +135,61 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Grafisch Lyceum Utrecht (2022 - Present)",
+        description: <>Game Development</>,
       },
     ],
   },
+
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
-    skills: [
-      {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
-        tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
+        display: true, // set to false to hide this section
+        title: "Technical skills",
+        skills: [
+            {
+                title: "Unity",
+                description: (
+                    <>Focused on creating gameplay systems, tools, and applications with C# (especially in Unity).</>
+                ),
+                tags: [
+                    {
+                        name: "C#",
+                        icon: "csharp",
+                    },
+                    {
+                        name: "Unity",
+                        icon: "unity",
+                    }
+                ],
+                images: [],
+            },
+            {
+                title: "JavaScript",
+                description: (
+                    <>Experienced in building dynamic and interactive applications, both front-end and back-end.</>
+                ),
+                tags: [
+                    {
+                        name: "JavaScript",
+                        icon: "javascript",
+                    },
+                ],
+                images: [],
+            },
+            {
+                title: "PHP",
+                description: (
+                    <>Skilled in developing robust back-end systems, APIs, and database-driven applications.</>
+                ),
+                tags: [
+                    {
+                        name: "PHP",
+                        icon: "php",
+                    },
+                ],
+                images: [],
+            },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },  
-    ],
-  },
+    },
 };
 
 const blog: Blog = {

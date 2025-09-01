@@ -1,0 +1,79 @@
+---
+title: "Twinstick Shooter: Average Heist Game"
+summary: "A Unity twin-stick shooter where players can sneak through a bank heist or go in guns blazing."
+images:
+  - "/images/projects/average-heist-game/logo.png"
+tags: ["Unity", "C#", "Game Development"]
+---
+
+## Overview
+
+This was my **second group project**, built in Unity with C#.
+The theme was *twin-stick shooter*, and our concept was a **bank heist** where players could choose between **stealth or chaos**. The objective: steal as much loot as possible and escape the police.
+
+- **Team size:** 4 (2 artists, 1 other developer, and me)
+- **Development time:** ~2 months
+
+## Key features:
+- Responsive **twin-stick shooting & movement**
+- **Interactable objects** (doors, pickups, cameras)
+- **Randomized loot system** with weight restrictions
+- Player choice between **stealthy heist or full shootout**
+
+## My Contributions
+
+### 🔹 Object Interaction System
+I built a system for interacting with objects like pickups and doors.
+- Made it **modular and easy to extend** so new objects can be added without rewriting code.
+- My first time working with **interfaces** in Unity, which helped me learn clean coding practices.
+
+```csharp:IInteractable.cs
+public interface IInteractable
+{
+    public string popupText { get; set; }
+    public float interactionTime { get; set; }
+    public InventoryItemData requiredItem { get; set; }
+
+    public GameEvent onExitInteractableRange { get; set; }
+    public GameEvent onEnterInteractableRange { get; set; }
+    public GameEvent onInteract { get; set; }
+
+    public void Interact();
+    public bool CanInteract();
+}
+```
+
+Full code snippet available [here](https://gist.github.com/Gorott/1f9bc6db14c3510c4a87d86e13d1ce39)
+
+### 🔹 Loot System
+I implemented the loot generation system for safes and containers.
+- Each safe has its own loot table, so locations feel different.
+- Loot is randomized (cash and weight) with different value vs. weight trade-offs.
+- Player inventory has a weight cap, so players must choose carefully.
+```csharp:SafeLootData.cs
+public class SafeLootData : ScriptableObject
+{
+    public string name;
+    public GameObject lootObject;
+    public string id;
+    public float value;
+    public float weight;
+    public float interactionTime;
+
+}
+```
+Full code snippet available [here](https://gist.github.com/Gorott/a3e94878962790b4fa33c47a444ab40e)
+
+
+## Challenges and Learnings
+
+I had to leave the project early for medical reasons. This gave the other programmer extra work, and the project wasn’t finished on time.
+
+From this, I learned:
+- Good communication is very important in team projects.
+- Sharing tasks helps avoid problems if someone leaves.
+- Modular systems make projects easier to continue, even if team members change.
+
+Even though it didn’t finish, I gained a lot of Unity experience and learned how to build flexible systems.
+
+## End Result
